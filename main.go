@@ -17,7 +17,7 @@ func main() {
 	for i := range a {
 		a[i] = rand.Intn(100*SIZE)
 	}
-	// fmt.Println("---------- insertion sort ----------")
+	fmt.Println("---------- insertion sort ----------")
 	// fmt.Println("before:\t", a)
 	time_in := time.Now()
 	Sort.InsertionSort(a)
@@ -30,10 +30,23 @@ func main() {
 	for i := range a {
 		a[i] = rand.Intn(20*SIZE)
 	}
-	// fmt.Println("---------- selection sort ----------")
+	fmt.Println("---------- selection sort ----------")
 	// fmt.Println("before:\t", a)
 	time_in = time.Now()
 	Sort.InsertionSort(a)
+	time_out = time.Now()
+	// fmt.Println("after:\t", a)
+	fmt.Println("time:\t", time_out.Sub(time_in).String())
+
+	// heap sort
+	a = make([]int, SIZE)
+	for i := range a {
+		a[i] = rand.Intn(20*SIZE)
+	}
+	fmt.Println("------------ heap sort -------------")
+	// fmt.Println("before:\t", a)
+	time_in = time.Now()
+	Sort.HeapSort(a)
 	time_out = time.Now()
 	// fmt.Println("after:\t", a)
 	fmt.Println("time:\t", time_out.Sub(time_in).String())
