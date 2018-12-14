@@ -13,13 +13,13 @@ func HeapSort(a []int) []int {
 	buildHeap(&a) // 初期化: sortしたい対象の配列をヒープに変換する
 	for i := len(a) - 1; 1 < i; i-- {
 		a[0], a[i] = a[i], a[0] // ヒープの根は[0, i]で最大値になっているので移動して取っておく
-		heapify(&a, 0, i) // もう一度ヒープ化する
+		heapify(&a, 0, i)       // もう一度ヒープ化する
 	}
 	return a
 }
 
 func buildHeap(a *[]int) {
-	n := len(*a)/2-1
+	n := len(*a)/2 - 1
 	for i := n; 0 < i; i-- {
 		heapify(a, i, n)
 	}
@@ -28,7 +28,7 @@ func buildHeap(a *[]int) {
 // a[idx, max)をヒープ化する
 func heapify(a *[]int, idx, max int) {
 	largest := idx // 親a[idx]が自身の子供のどちらよりも大きいことを仮定する
-	left := 2*idx + 1;
+	left := 2*idx + 1
 	right := 2*idx + 2
 	if left < max && (*a)[idx] < (*a)[left] {
 		largest = left // 左の子が親よりも大きかった
