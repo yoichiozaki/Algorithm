@@ -77,4 +77,17 @@ func main() {
 	time_out = time.Now()
 	// fmt.Println("after:\t", a)
 	fmt.Println("time:\t", time_out.Sub(time_in).String())
+
+	// counting sort
+	a = make([]int, SIZE)
+	for i := range a {
+		a[i] = rand.Intn(100 * SIZE)
+	}
+	fmt.Println("----------- count sort -----------")
+	// fmt.Println("before:\t", a)
+	time_in = time.Now()
+	a = Sort.CountingSort(a, 100 * SIZE)
+	time_out = time.Now()
+	// fmt.Println("after:\t", a)
+	fmt.Println("time:\t", time_out.Sub(time_in).String())
 }
