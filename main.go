@@ -172,10 +172,12 @@ func main() {
 		a[i] = rand.Intn(100 * SIZE)
 	}
 	fmt.Println("-------- hash based search --------")
+	table := Search.NewHashTable()
+	table.Load(a, Search.LinkedList)
 	timeIn = time.Now()
 	for i := 0; i < 1000; i++ {
 		target = rand.Intn(100 * SIZE)
-		if Search.HashBasedSearch(a, target, Search.LinkedList) {
+		if Search.HashBasedSearch(a, table, target, Search.LinkedList) {
 			fmt.Printf("Found! - Target: %d\n", target)
 		}
 		// TODO: open address method is not yet completed.
@@ -201,4 +203,27 @@ func main() {
 	// fmt.Println(bf.Exists("5"))
 	// fmt.Println(bf.Exists("10"))
 	// fmt.Println(bf.Exists("999"))
+
+	// search with binary search tree
+	a = make([]int, SIZE)
+	for i := range a {
+		a[i] = rand.Intn(100 * SIZE)
+	}
+	fmt.Println("- search with binary search tree -")
+	bst := Search.NewTree()
+	for _, i := range a {
+		bst.Add(i)
+	}
+	// bst.Inorder()
+	timeIn = time.Now()
+	for i := 0; i < 1000; i++ {
+		target = rand.Intn(100 * SIZE)
+		if bst.Search(target) {
+			fmt.Printf("Found! - Target: %d\n", target)
+		}
+	}
+	timeOut = time.Now()
+	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
+	fmt.Println()
+
 }

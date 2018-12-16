@@ -11,9 +11,7 @@ import (
 // ある。具体的にはリンク付きリストを用いる方法やオープンアドレス法がある。ハッシュに基づいた探索は時間計算量については優秀であるが、
 // 空間計算量の観点からでは無駄が多いとされる。無限に広いハッシュテーブルを用意すれば探索自体はO(1)の時間で済むが、現実的ではない。
 
-func HashBasedSearch(a []int, t int, method CollisionAvoidanceMethod) bool {
-	table := newTable(a)
-	table.load(a, method)
+func HashBasedSearch(a []int, table Table, t int, method CollisionAvoidanceMethod) bool {
 	h := hash(t)
 	switch method {
 	case LinkedList:
@@ -33,7 +31,7 @@ func HashBasedSearch(a []int, t int, method CollisionAvoidanceMethod) bool {
 			if table[now].element == t {
 				return true
 			} else {
-				now = (now+b+b*b)%100
+				now = (now + b + b*b) % 100
 			}
 		}
 		return false
@@ -44,6 +42,7 @@ func HashBasedSearch(a []int, t int, method CollisionAvoidanceMethod) bool {
 }
 
 type CollisionAvoidanceMethod int
+
 const (
 	LinkedList CollisionAvoidanceMethod = iota
 	OpenAddress
@@ -54,20 +53,20 @@ const SIZE = 1000
 
 type entry struct {
 	element int
-	next *entry
+	next    *entry
 }
 
 func newEntry(e int) *entry {
 	return &entry{element: e, next: nil}
 }
 
-type table []*entry
+type Table []*entry
 
-func newTable(a []int) table {
+func NewHashTable() Table {
 	return make([]*entry, SIZE)
 }
 
-func (t *table) load(a []int, method CollisionAvoidanceMethod) {
+func (t *Table) Load(a []int, method CollisionAvoidanceMethod) {
 	switch method {
 	case LinkedList:
 		for _, e := range a {
@@ -82,7 +81,7 @@ func (t *table) load(a []int, method CollisionAvoidanceMethod) {
 		}
 	// TODO: open address method is not yet completed.
 	case OpenAddress:
-		NextElement:
+	NextElement:
 		for _, e := range a {
 			h := hash(e)
 			if (*t)[h] == nil {
@@ -90,7 +89,7 @@ func (t *table) load(a []int, method CollisionAvoidanceMethod) {
 			} else {
 				i := 0
 				for (*t)[h] != nil {
-					h = (h+i+i*i)%100
+					h = (h + i + i*i) % 100
 					if (*t)[h] == nil {
 						(*t)[h] = newEntry(e)
 						continue NextElement
@@ -106,5 +105,5 @@ func (t *table) load(a []int, method CollisionAvoidanceMethod) {
 }
 
 func hash(x int) int {
-	return x%SIZE
+	return x % SIZE
 }
