@@ -165,4 +165,25 @@ func main() {
 	timeOut = time.Now()
 	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
 	fmt.Println()
+
+	// hash based search
+	a = make([]int, SIZE)
+	for i := range a {
+		a[i] = rand.Intn(100 * SIZE)
+	}
+	fmt.Println("-------- hash based search --------")
+	timeIn = time.Now()
+	for i := 0; i < 1000; i++ {
+		target = rand.Intn(100 * SIZE)
+		if Search.HashBasedSearch(a, target, Search.LinkedList) {
+			fmt.Printf("Found! - Target: %d\n", target)
+		}
+		// TODO: open address method is not yet completed.
+		// if Search.HashBasedSearch(a, target, Search.OpenAddress) {
+		// 	fmt.Printf("Found! - Target: %d\n", target)
+		// }
+	}
+	timeOut = time.Now()
+	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
+	fmt.Println()
 }
