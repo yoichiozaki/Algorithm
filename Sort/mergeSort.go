@@ -12,16 +12,16 @@ func MergeSort(a []int) []int {
 }
 
 func mergeSort(a, result []int, start, end int) {
-	if end - start < 2 {
+	if end-start < 2 {
 		return
 	}
-	if end - start == 2 {
+	if end-start == 2 {
 		if result[start] > result[start+1] {
 			result[start], result[start+1] = result[start+1], result[start]
 		}
 		return
 	}
-	mid := (end + start)/2
+	mid := (end + start) / 2
 	mergeSort(result, a, start, mid)
 	mergeSort(result, a, mid, end)
 	i := start

@@ -15,7 +15,7 @@ func CountingSort(a []int, max int) []int {
 	for i := 0; i < max; i++ {
 		counting[i+1] += counting[i] // 累積
 	}
-	for i := len(a)-1; 0 <= i; i-- {
+	for i := len(a) - 1; 0 <= i; i-- {
 		counting[a[i]]--
 		ret[counting[a[i]]] = a[i]
 	}
