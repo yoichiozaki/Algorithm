@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Algorithm/Graph"
 	"Algorithm/Search"
 	"Algorithm/Sort"
 	"fmt"
@@ -226,4 +227,54 @@ func main() {
 	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
 	fmt.Println()
 
+	maze1 := `s.........
+#########.
+#.......#.
+#..####.#.
+##....#.#.
+#####.#.#.
+g.#.#.#.#.
+#.#.#.#.#.
+#.#.#.#.#.
+#.....#...`
+	maze2 := `s.........
+#########.
+#.......#.
+#..####.#.
+##....#.#.
+#####.#.#.
+g.#.#.#.#.
+#.#.#.#.#.
+###.#.#.#.
+#.....#...`
+
+	// depth first search
+	fmt.Println(maze1)
+	if Graph.DepthFirstSearch(maze1) {
+		fmt.Println("we can reach the goal from start.")
+	} else {
+		fmt.Println("we can NOT reach the goal from start.")
+	}
+
+	fmt.Println(maze2)
+	if Graph.DepthFirstSearch(maze2) {
+		fmt.Println("we can reach the goal from start.")
+	} else {
+		fmt.Println("we can NOT reach the goal from start.")
+	}
+
+	// breadth first search
+	fmt.Println(maze1)
+	if Graph.BreadthFirstSearch(maze1) {
+		fmt.Println("we can reach the goal from start.")
+	} else {
+		fmt.Println("we can NOT reach the goal from start.")
+	}
+
+	fmt.Println(maze2)
+	if Graph.BreadthFirstSearch(maze2) {
+		fmt.Println("we can reach the goal from start.")
+	} else {
+		fmt.Println("we can NOT reach the goal from start.")
+	}
 }
