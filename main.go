@@ -146,4 +146,23 @@ func main() {
 	timeOut = time.Now()
 	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
 	fmt.Println()
+
+	// bianry search
+	a = make([]int, SIZE)
+	for i := range a {
+		a[i] = rand.Intn(100 * SIZE)
+	}
+	fmt.Println("--------- binary search ---------")
+	Sort.QuickSort(&a, 0, len(a)-1) // this is my own implementation.
+	// sort.Ints(a)
+	timeIn = time.Now()
+	for i := 0; i < 1000; i++ {
+		target = rand.Intn(100 * SIZE)
+		if Search.BinarySearch(a, target, false) {
+			fmt.Printf("Found! - Target: %d\n", target)
+		}
+	}
+	timeOut = time.Now()
+	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
+	fmt.Println()
 }
