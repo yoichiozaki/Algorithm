@@ -186,4 +186,19 @@ func main() {
 	timeOut = time.Now()
 	fmt.Println("time for 1000 searches:\t", timeOut.Sub(timeIn).String())
 	fmt.Println()
+
+	// bloom filter
+	// bf := Search.NewBloomFilter(3)
+	// bf.Add("1")
+	// bf.Add("2")
+	// bf.Add("3")
+	// bf.Add("4")
+	// bf.Add("5")
+	// fmt.Println(bf.Exists("1"))
+	// fmt.Println(bf.Exists("2"))
+	// fmt.Println(bf.Exists("3"))
+	// fmt.Println(bf.Exists("4"))
+	// fmt.Println(bf.Exists("5"))
+	// fmt.Println(bf.Exists("10"))
+	// fmt.Println(bf.Exists("999"))
 }
