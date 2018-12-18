@@ -162,7 +162,7 @@ func (g *Graph) GetNeighbours(v Vertex) []Vertex {
 	return vertices
 }
 
-func (g *Graph) Visualize() error {
+func (g *Graph) Visualize(name string) error {
 	gv := gographviz.NewGraph()
 	if err := gv.SetName("G"); err != nil {
 		return err
@@ -200,8 +200,8 @@ func (g *Graph) Visualize() error {
 		}
 	}
 	s := gv.String()
-	dotfile := "./Graph/img/gv.dot"
-	pngfile := "./Graph/img/gv.png"
+	dotfile := "./Graph/img/gv" + name + ".dot"
+	pngfile := "./Graph/img/gv" + name + ".png"
 	file, err := os.Create(dotfile)
 	if err != nil {
 		return err
