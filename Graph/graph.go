@@ -24,7 +24,7 @@ type Edge struct {
 }
 
 type Graph struct {
-	vertices      map[Vertex]int      // 頂点集合 = 頂点: 隣接頂点数
+	vertices      map[Vertex]int      // 頂点集合 = 頂点: 何番目に追加されたか
 	verticesCount int                 // 頂点数
 	edges         map[Edge]int        // 辺集合 = 始点と終点のペア: 重み
 	edgesCount    int                 // 辺数
@@ -43,7 +43,7 @@ func NewGraph() *Graph {
 	}
 }
 
-func (g *Graph) setDir(isDir bool) {
+func (g *Graph) SetDir(isDir bool) {
 	g.isDirected = isDir
 }
 
@@ -64,9 +64,9 @@ func (g *Graph) ExistsVertex(v Vertex) bool {
 
 func (g *Graph) AddVertex(v Vertex) error {
 	if g.ExistsVertex(v) {
-		return errors.New("g has already have the vertex v")
+		return errors.New("g already has the vertex v")
 	}
-	g.vertices[v]++
+	g.vertices[v] = g.verticesCount
 	g.verticesCount++
 	return nil
 }
@@ -82,8 +82,10 @@ func (g *Graph) RemoveVertex(v Vertex) error {
 
 func (g *Graph) GetEdges() []Edge {
 	edges := make([]Edge, g.edgesCount)
-	for e, i := range g.edges {
+	i := 0
+	for e, _ := range g.edges {
 		edges[i] = e
+		i++
 	}
 	return edges
 }
@@ -144,7 +146,7 @@ func (g *Graph) GetWeight(from, to Vertex) (int, error) {
 	return weight, nil
 }
 
-func (g *Graph) setWeight(from, to Vertex, weight int) error {
+func (g *Graph) SetWeight(from, to Vertex, weight int) error {
 	if from == to {
 		return errors.New("can not change an edge from and to the same vertex")
 	}
@@ -155,7 +157,7 @@ func (g *Graph) setWeight(from, to Vertex, weight int) error {
 	return nil
 }
 
-func (g *Graph) getNeighbours(v Vertex) []Vertex {
+func (g *Graph) GetNeighbours(v Vertex) []Vertex {
 	vertices := make([]Vertex, g.vertices[v])
 	return vertices
 }

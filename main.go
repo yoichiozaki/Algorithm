@@ -5,6 +5,7 @@ import (
 	"Algorithm/Search"
 	"Algorithm/Sort"
 	"fmt"
+	"log"
 	"math/rand"
 	"time"
 )
@@ -277,4 +278,27 @@ g.#.#.#.#.
 	} else {
 		fmt.Println("we can NOT reach the goal from start.")
 	}
+
+	// graph
+	nodes := make([]Graph.Vertex, 100)
+	for i := range nodes {
+		nodes[i] = Graph.Vertex(i)
+	}
+	sample := Graph.NewGraph()
+	for _, node := range nodes {
+		sample.AddVertex(node)
+	}
+	for i := 0; i < 100; i++ {
+		if err := sample.AddEdge(Graph.Vertex(rand.Intn(100)), Graph.Vertex(rand.Intn(100)), rand.Intn(10));
+		err != nil {
+			continue
+		}
+	}
+	err := sample.Visualize()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// dijkstra algorithm
+
 }
